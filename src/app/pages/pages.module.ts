@@ -9,8 +9,9 @@ import { FormsModule } from '@angular/forms';
 // temporal
 import { IncrementadorComponent } from '../components/incrementador/incrementador.component';
 import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.component';
-// ng2-Chart 
+// ng2-Chart
 import { ChartsModule } from 'ng2-charts';
+import { AcountSettingsComponent } from './acount-settings/acount-settings.component';
 
 @NgModule({
     imports: [
@@ -32,10 +33,10 @@ import { ChartsModule } from 'ng2-charts';
         Graficas1Component,
         ProgressComponent,
         IncrementadorComponent,
-        GraficoDonaComponent
+        GraficoDonaComponent,
+        AcountSettingsComponent
     ],
     providers: [
-        
     ],
 })
 export class PagesModule { }

@@ -9,7 +9,7 @@ import { SidebarService } from '../../services/sidebar.service';
 export class SidebarComponent implements OnInit {
 
   constructor(public sSer: SidebarService) {
-    console.log(sSer);
+    // console.log(sSer);
    }
 
   ngOnInit(): void {

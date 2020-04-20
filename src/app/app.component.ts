@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SettingsService } from './services/settings.service';
+import { SettingsService } from './services/services/settings.service';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +8,8 @@ import { SettingsService } from './services/settings.service';
 })
 export class AppComponent {
   
-  constructor(private settiSer: SettingsService){
-
+  constructor(private settiSer: SettingsService
+              ){
 
 
   }

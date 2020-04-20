@@ -77,6 +77,12 @@ export class LoginRegisterService {
     );
   }
 
+  actualizarUsuario(usuario: Usuario){
+
+    return this.http.put(this.url + '/usuario/'+usuario._id+'?token='+this.token, usuario);
+
+  }
+
   guardarStorage(usuario: Usuario, token: string) {
     //guardamos la info en localstorage y navegamos a dashboard
     localStorage.setItem("tokenApp", token);

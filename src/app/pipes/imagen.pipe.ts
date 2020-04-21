@@ -9,8 +9,8 @@ export class ImagenPipe implements PipeTransform {
     
     let url =environment.urlApi + '/img';
 
-    if(!urlImg){
-       return  url + '/cualquierimagen';
+    if(!urlImg|| urlImg.length === 0){
+       return  url + '/usuario/cualquierimagen';
     }
 if(urlImg.startsWith('http')) {
   // es de google:
@@ -29,7 +29,7 @@ if(urlImg.startsWith('http')) {
         url += "/usuario/"+urlImg;
         break;     
       default:
-         url += '/xxx';
+         url += '/usuario/xxx';
         break;
     }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { LoginRegisterService } from "src/app/services/services/login-register.service";
 import { Usuario } from "src/app/models/usuario.models";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: "app-profile",
@@ -17,11 +18,15 @@ export class ProfileComponent implements OnInit {
 
   guardar(usuario: Usuario) {
     this.usuario.nombre = usuario.nombre;
-    if(!this.usuario.google){
+    if(!this.usuario.googleuser){
     this.usuario.email = usuario.email;
     }
-    console.log(this.usuario);
 
-    this.lrs.actualizarUsuario(this.usuario).subscribe((u) => console.log(u));
+    this.lrs.actualizarUsuario(this.usuario).subscribe(
+()=>   Swal.fire({
+        icon: "success",
+        title: "Usuario actualizado corectamente"
+              })
+    );
   }
 }

@@ -4,7 +4,7 @@ import { environment } from "../../../environments/environment";
 import { Usuario } from "../../models/usuario.models";
 import { map } from "rxjs/operators";
 import Swal from "sweetalert2";
-import { Router } from '@angular/router';
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
@@ -15,8 +15,7 @@ export class LoginRegisterService {
   usuario: Usuario;
   token: string = "";
 
-  constructor(private http: HttpClient,
-    public router: Router) {
+  constructor(private http: HttpClient, public router: Router) {
     this.cargarStorage();
   }
 
@@ -42,16 +41,9 @@ export class LoginRegisterService {
 
     return this.http.post(this.url + "/login", usuario).pipe(
       map((res: any) => {
-        if (res.ok) {
-          this.guardarStorage(res.usuario, res.token);
-        } else {
-          // credenciales incorrectas
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: res.mensaje,
-          });
-        }
+        console.log(res);
+        this.guardarStorage(res.usuario, res.token);
+        this.router.navigate(["/login"]);
 
         return true;
       })
@@ -61,26 +53,33 @@ export class LoginRegisterService {
   loginGoogle(token: string) {
     return this.http.post(this.url + "/login/google", { idtoken: token }).pipe(
       map((res: any) => {
-        if (res.ok) {
-          this.guardarStorage(res.usuario, res.token);
-        } else {
-          // credenciales incorrectas
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: res.mensaje,
-          });
-        }
-
+        this.guardarStorage(res.usuario, res.token);
+        //this.router.navigate(["/login"]);
+console.log(res);
         return true;
       })
     );
   }
 
-  actualizarUsuario(usuario: Usuario){
+  actualizarUsuario(usuario: Usuario) {
+    return this.http
+      .put(
+        this.url + "/usuario/" + usuario._id + "?token=" + this.token,
+        usuario
+      )
+      .pipe(
+        map((res: any) => {
+          this.guardarStorage(res.usuario, this.token);
+              
+          Swal.fire({
+            icon: "success",
+            title: "Usuario Actualizado correctamente",
+            text: res.usuario.nombre
+          });
 
-    return this.http.put(this.url + '/usuario/'+usuario._id+'?token='+this.token, usuario);
-
+          return true;
+        })
+      );
   }
 
   guardarStorage(usuario: Usuario, token: string) {
@@ -90,7 +89,6 @@ export class LoginRegisterService {
 
     this.usuario = usuario;
     this.token = token;
-    this.router.navigate(['/login']);
   }
 
   cargarStorage() {
@@ -107,10 +105,9 @@ export class LoginRegisterService {
   logout() {
     this.token = "";
     this.usuario = null;
-    localStorage.removeItem('tokenApp');
-    localStorage.removeItem('usuarioApp');
+    localStorage.removeItem("tokenApp");
+    localStorage.removeItem("usuarioApp");
   }
-
 
   estaLogado() {
     return this.token.length > 5;

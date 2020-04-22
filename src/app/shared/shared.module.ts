@@ -14,7 +14,6 @@ import { PipesModule } from '../pipes/pipes.module';
         FooterComponent,
         HeaderComponent,
         SidebarComponent
-        
     ],
     imports: [
         RouterModule,

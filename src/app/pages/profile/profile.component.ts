@@ -1,16 +1,21 @@
-import { Component, OnInit } from "@angular/core";
-import { LoginRegisterService } from "src/app/services/services/login-register.service";
-import { Usuario } from "src/app/models/usuario.models";
+import { Component, OnInit } from '@angular/core';
+import { LoginRegisterService } from 'src/app/services/services/login-register.service';
+import { Usuario } from 'src/app/models/usuario.models';
 import Swal from 'sweetalert2';
+import { SubirArchivoService } from '../../services/services/subir-archivo.service';
 
 @Component({
-  selector: "app-profile",
-  templateUrl: "./profile.component.html",
-  styleUrls: ["./profile.component.css"],
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
   usuario: Usuario;
-  constructor(private lrs: LoginRegisterService) {}
+  archivo: File;
+
+  imagenTemp;
+  constructor(private lrs: LoginRegisterService,
+              private srs: SubirArchivoService) { }
 
   ngOnInit(): void {
     this.usuario = this.lrs.usuario;
@@ -18,15 +23,46 @@ export class ProfileComponent implements OnInit {
 
   guardar(usuario: Usuario) {
     this.usuario.nombre = usuario.nombre;
-    if(!this.usuario.googleuser){
-    this.usuario.email = usuario.email;
+    if (!this.usuario.googleuser) {
+      this.usuario.email = usuario.email;
     }
 
     this.lrs.actualizarUsuario(this.usuario).subscribe(
-()=>   Swal.fire({
-        icon: "success",
-        title: "Usuario actualizado corectamente"
-              })
+      () => Swal.fire({
+        icon: 'success',
+        title: 'Usuario actualizado corectamente'
+      })
     );
+
   }
+
+  seleccionaImagen(file: File) {
+
+    if (!file) {
+      this.archivo = null;
+      return;
+    }
+    if (file.type.indexOf('image') < 0) {
+      Swal.fire('Archivo incorrecto', 'No es un archivo de imagen', 'error');
+      return;
+    }
+
+    this.archivo = file;
+
+    // cargar el archivo temporal
+    const reader = new FileReader();
+    const urlTem = reader.readAsDataURL(file);
+    reader.onloadend = () => this.imagenTemp = reader.result;
+
+  }
+
+  guardarImagenUsuario() {
+
+    // validar el arhivoç
+    console.log(this.archivo);
+    this.srs.subirArchivo(this.archivo, 'usuarios', this.usuario._id)
+      .subscribe();
+    this.imagenTemp = null;
+  }
+
 }

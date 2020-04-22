@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   constructor( private lrs: LoginRegisterService) { }
 
   ngOnInit(): void {
-    this.usuario=this.lrs.usuario;
+    this.usuario = this.lrs.usuario;
 
   }
 

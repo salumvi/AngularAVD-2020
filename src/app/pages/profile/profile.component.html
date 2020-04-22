@@ -21,7 +21,7 @@
                 </div>
                
                
-                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"> <i class="fa fa-save"></i>
+                <button type="submit"  class="btn btn-success waves-effect waves-light m-r-10"> <i class="fa fa-save"></i>
                     Guardar</button>
             </form>
         </div>
@@ -29,22 +29,27 @@
 </div>
 <div class="col-lg-5">
     <div class="card">
-        <div class="card-body">
+        <div class="card-body" align="center">
             <h4 class="card-title">Fotografía del ususario</h4>
             <h6 class="card-subtitle">Nombre del usuario</h6>
+            <img *ngIf="!imagenTemp" [src]="imagenTemp" class="w150" alt="">
+            <img *ngIf="imagenTemp" [src]="imagenTemp" class="w150" alt="">
 
-           
+           <form >
             
             <div class="form-group">
                 <label for="exampleInputEmail1">Selecciones un archivo</label>
                 <div class="input-group">
                     <div class="input-group-addon"><i class="ti-file"></i></div>
-                    <input type="file">
+                    <input type="file"  (change)="seleccionaImagen($event.target.files[0])"  name="archivo" >
                 </div>
             </div>
             <br>
-            <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 btn-block" > <i class="fa fa-save"></i>
-                Actualizar Foto</button>
+            <button (click)="guardarImagenUsuario()" [disabled] ="!archivo" type="button" class="btn btn-success waves-effect waves-light m-r-10 btn-block" > 
+                <i class="fa fa-save"></i>
+                Actualizar Foto
+            </button>
+        </form>
         </div>
     </div>
 </div>

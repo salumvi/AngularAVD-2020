@@ -16,24 +16,24 @@ export class BreadcrumbsComponent implements OnInit {
               private title: Title,
               private meta: Meta) {
 
-    this.getDateRoute().subscribe( data => {
+    this.getDateRoute().subscribe(data => {
       this.titulo = data.titulo;
       title.setTitle(this.titulo);
-       // metatag informacion
+      // metatag informacion
       const metaTag: MetaDefinition = {
         name: 'descripcion',
-        content: this.titulo + ' desc: ' +data.descripcion
-      }
-  
+        content: this.titulo + ' desc: ' + data.descripcion
+      };
+
       this.meta.updateTag(metaTag);
 
     });
 
-   
 
-   
 
-   }
+
+
+  }
 
   ngOnInit(): void {
   }
@@ -42,14 +42,12 @@ export class BreadcrumbsComponent implements OnInit {
 
   getDateRoute() {
     return this.route.events.pipe(
-      // filtro por los Activation End 
-      filter(evento => evento instanceof ActivationEnd ),
+      // filtro por los Activation End
+      filter(evento => evento instanceof ActivationEnd),
       filter((evento: ActivationEnd) => evento.snapshot.firstChild === null),
       map((evento: ActivationEnd) => evento.snapshot.data)
 
-    )
-
-
+    );
 
   }
 

@@ -15,6 +15,8 @@ import { AcountSettingsComponent } from './acount-settings/acount-settings.compo
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
+import { PipesModule } from '../pipes/pipes.module';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
     imports: [
@@ -22,6 +24,8 @@ import { ProfileComponent } from './profile/profile.component';
         PagesRoutingModule,
         FormsModule,
         ChartsModule,
+        PipesModule,
+        CommonModule
     ],
     exports: [
         DashboardComponent,
@@ -30,7 +34,7 @@ import { ProfileComponent } from './profile/profile.component';
         IncrementadorComponent,
         GraficoDonaComponent
     ],
-    declarations: [
+    declarations: [       
         PagesComponent,
         DashboardComponent,
         Graficas1Component,

@@ -20,65 +20,64 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     init_plugines();
 
-    this.forma= new FormGroup({
+    this.forma = new FormGroup({
       nombre: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email]),
       password1: new FormControl(null, Validators.required),
       password2: new FormControl(null, Validators.required),
       condiciones: new FormControl(false),
-    },{
-      validators: this.sonIguales('password1','password2') //validacion general del formulario
+    }, {
+      validators: this.sonIguales('password1', 'password2') // validacion general del formulario
     })
 
 
-this.forma.setValue({
-  nombre: 'usuario1',
-  email: 'usuario1@gmail.com',
-  password1: '123456',
-  password2: '123456',
-  condiciones: true
-})
+    this.forma.setValue({
+      nombre: 'usuario1',
+      email: 'usuario1@gmail.com',
+      password1: '123456',
+      password2: '123456',
+      condiciones: true
+    });
 
   }
 
-  sonIguales(campo1: string, campo2: string){
-    return ( group: FormGroup ) =>{
-      let pass1 = group.controls[campo1].value;
-      let pass2 = group.controls[campo2].value;
-        if(pass1===pass2){
-          return null;
-        }
-      return {sonIguales: true};
+  sonIguales(campo1: string, campo2: string) {
+    return (group: FormGroup) => {
+      const pass1: string = group.controls[campo1].value;
+      const pass2: string = group.controls[campo2].value;
+      if (pass1 === pass2) {
+        return null;
+      }
+      return { sonIguales: true };
     }
   }
 
-  registrarUsuario(){
-
-    if(this.forma.invalid) {
+  registrarUsuario() {
+    if (this.forma.invalid) {
       return;
     }
-    if(! this.forma.value.condiciones){
+    if (!this.forma.value.condiciones) {
 
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'Debe aceptar las condiciones!',
-      })
-      return ;
+      });
+      return;
     }
-    const usuario = new Usuario(this.forma.value.nombre,this.forma.value.email,this.forma.value.password1)
+    const usuario = new Usuario(this.forma.value.nombre, this.forma.value.email, this.forma.value.password1)
 
     this.registerSer.registrarUsuario(usuario).subscribe(
-      () => this.router.navigate(['/dasboard'])
-      , e =>{
-      //este error vien del servidor
+      () => this.router.navigate(['dashboard'])
+      , e => {
+        // este error vien del servidor
         Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: e.error.mensaje,
-      })
-    });
-              ;
+          icon: 'error',
+          title: 'Oops....',
+          text: e.error.mensaje,
+        });
+      });
+    ;
   }
 
 }

@@ -1,0 +1,89 @@
+
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <input #input  (keyup) ="buscarUsuarios( input.value )" type="text" class="form-control" placeholder="Buscar Usuarios">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="cargando" class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="alert alert-warning text-center">
+                    <strong>Cargando</strong>
+                    <br>
+                    <i class="fa fa-refresh fa-spin fa-2x"></i>
+                    <br>
+                    <span>Espere por favor</span>            
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div  *ngIf="!cargando" class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                 <h3 class="card-title"> Usuarios registrados (<small> {{totalUsuarios}} </small> )</h3>   
+               
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Correo</th>
+                            <th>Nombre</th>
+                            <th>Role</th>
+                            <th>Auth</th>
+                            <th>  
+                      
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let usuario of usuarios, let i = index">
+                            <td class="w70"> 
+                                <img (click)="modificarImagen(usuario)" class="w50 img-circle pointer" [src]="usuario.img | imagen">
+                            </td>
+                            <td>{{usuario.email}}</td>
+                            <td>{{usuario.nombre}}</td>
+                            <td>
+                                <select [(ngModel)]="usuario.role" class="form-control">
+                                    <option *ngFor="let rol of roles" [value]="rol.value" > {{rol.value}} </option>
+                        
+                                  </select>     
+
+                            </td>
+                            <td>
+                                <span *ngIf="usuario.googleuser" class="badge badge-primary">Google</span>
+                                <span *ngIf="!usuario.googleuser" class="badge badge-success">Local</span>
+                            </td>
+                            <td>
+                                <button  (click)="guardarUsuario(usuario)" type="button" class="btn btn-primary mr-1">
+                                    <i class="fa fa-save"></i>
+                                   </button> 
+                                   <button  (click)="borrarUsuario(usuario, i)" type="button" class="btn btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </button> 
+                               
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+
+                <button (click) = "cambiarDesde(-5)" class="btn btn-secondary">  <i class="mdi mdi-arrow-left" aria-hidden="true"></i> Anteriores</button>
+                <button (click) = "cambiarDesde(5)"class="btn btn-secondary"> Siguientes<i class="mdi mdi-arrow-right float-right" aria-hidden="true"></i></button>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

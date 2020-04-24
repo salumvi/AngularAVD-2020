@@ -24,7 +24,7 @@ export class LoginRegisterService {
     return this.http.post(this.url + '/usuario', usuario).pipe(
       
       map((res: any) => {
-        console.log(res);
+        
         Swal.fire({
           icon: 'success',
           title: 'Usuario creado correctamente',
@@ -42,10 +42,8 @@ export class LoginRegisterService {
       localStorage.removeItem('email');
     }
 
-
     return this.http.post(this.url + '/login', usuario).pipe(
       map((res: any) => {
-
         this.guardarStorage(res.usuario, res.token);
         // this.router.navigate(['/login']);
 
@@ -62,27 +60,6 @@ export class LoginRegisterService {
         return true;
       })
     );
-  }
-
-  actualizarUsuario(usuario: Usuario) {
-    return this.http
-      .put(
-        this.url + '/usuario/' + usuario._id + '?token=' + this.token,
-        usuario
-      )
-      .pipe(
-        map((res: any) => {
-          this.guardarStorage(res.usuario, this.token);
-
-          Swal.fire({
-            icon: 'success',
-            title: 'Usuario Actualizado correctamente',
-            text: res.usuario.nombre
-          });
-
-          return true;
-        })
-      );
   }
 
   guardarStorage(usuario: Usuario, token: string = this.token) {

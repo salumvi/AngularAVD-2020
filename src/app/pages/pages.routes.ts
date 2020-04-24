@@ -9,6 +9,8 @@ import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { LoginGuardGuard } from '../services/guards/login-guard.guard';
 import { ProfileComponent } from './profile/profile.component';
+import { NopagefoundComponent } from '../shared/nopagefound/nopagefound.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 
 const routes: Routes = [
@@ -25,11 +27,19 @@ const routes: Routes = [
             {path: 'promesas', component: PromesasComponent, data: {titulo: 'Promesas', descripcion: 'Aquí las Promesas'}},
             {path: 'rxjs', component: RxjsComponent, data: {titulo: 'Rxjs', descripcion: 'Rxjs'}},
             {path: 'perfil', component: ProfileComponent, data: {titulo: 'Perfil', descripcion: 'perfil de usuario'}},
+
+            // Mantenimiento
+            {path: 'usuarios',
+             component: UsuariosComponent,
+             data: {titulo: 'Usuario Mantenimiento', descripcion: 'Mantinimiento de usuarios'}},
             {path: '', redirectTo: '/login', pathMatch: 'full' }
 
 
-        ]
-     }
+        ],
+
+     },
+    { path: '**', component: NopagefoundComponent }
+
 ];
 
 @NgModule({

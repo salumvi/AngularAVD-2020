@@ -12,7 +12,7 @@ export class SidebarComponent implements OnInit {
 
   usuario: Usuario;
   constructor(public sSer: SidebarService,
-    private lrs: LoginRegisterService) {
+              private lrs: LoginRegisterService) {
     // console.log(sSer);
    }
 

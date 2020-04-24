@@ -17,6 +17,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { CommonModule } from '@angular/common';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
 
 @NgModule({
     imports: [
@@ -34,7 +36,7 @@ import { CommonModule } from '@angular/common';
         IncrementadorComponent,
         GraficoDonaComponent
     ],
-    declarations: [       
+    declarations: [
         PagesComponent,
         DashboardComponent,
         Graficas1Component,
@@ -44,7 +46,9 @@ import { CommonModule } from '@angular/common';
         AcountSettingsComponent,
         PromesasComponent,
         RxjsComponent,
-        ProfileComponent
+        ProfileComponent,
+        UsuariosComponent,
+        ModalUploadComponent
     ],
     providers: [
     ],

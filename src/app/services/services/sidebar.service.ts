@@ -17,6 +17,15 @@ export class SidebarService {
       {titulo: 'Rxjs', url: '/rxjs'},
 
     ]
-  }]
+  }, {
+    titulo: 'Mantenimiento',
+    icono: 'mdi mdi-spin mdi-shovel-off',
+    submenu: [
+      { titulo: 'Usuarios', url:  '/usuarios' },
+      { titulo: 'Medicos', url:  '/medicos' },
+      { titulo: 'hospitales', url: '/hospitales' }
+    ]
+  }
+]
   constructor() { }
 }

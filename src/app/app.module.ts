@@ -21,7 +21,7 @@ import { PipesModule } from './pipes/pipes.module';
     AppComponent,
     LoginComponent,
     NopagefoundComponent,
-    RegisterComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

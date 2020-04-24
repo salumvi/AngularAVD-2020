@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginRegisterService } from 'src/app/services/services/login-register.service';
 import { Usuario } from 'src/app/models/usuario.models';
 import Swal from 'sweetalert2';
-import { SubirArchivoService } from '../../services/services/subir-archivo.service';
+import { UsuarioService } from '../../services/services/usuario.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit {
 
   imagenTemp;
   constructor(private lrs: LoginRegisterService,
-              private srs: SubirArchivoService) { }
+              private urs: UsuarioService) { }
 
   ngOnInit(): void {
     this.usuario = this.lrs.usuario;
@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
       this.usuario.email = usuario.email;
     }
 
-    this.lrs.actualizarUsuario(this.usuario).subscribe(
+    this.urs.actualizarUsuario(this.usuario).subscribe(
       () => Swal.fire({
         icon: 'success',
         title: 'Usuario actualizado corectamente'
@@ -59,8 +59,8 @@ export class ProfileComponent implements OnInit {
   guardarImagenUsuario() {
 
     // validar el arhivoç
-    console.log(this.archivo);
-    this.srs.subirArchivo(this.archivo, 'usuarios', this.usuario._id)
+  
+    this.urs.subirArchivo(this.archivo, 'usuarios', this.usuario._id)
       .subscribe();
     this.imagenTemp = null;
   }

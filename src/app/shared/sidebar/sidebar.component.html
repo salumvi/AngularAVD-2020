@@ -8,7 +8,7 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="user-profile">
-                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img [src]="lrs.usuario.img | imagen" alt="user" /><span class="hide-menu">{{lrs.usuario.nombre}} </span></a>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img [src]="lrs.usuario?.img | imagen" alt="user" /><span class="hide-menu">{{lrs.usuario?.nombre}} </span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a routerLink="/perfil" routerLinkActive="active" >My perfil</a></li>
                                 <li><a href="javascript:void()">My Balance</a></li>
@@ -19,7 +19,7 @@
                         </li>
                         <li class="nav-devider"></li>
                         <li class="nav-small-cap">PERSONAL</li>
-                        <li *ngFor="let item of sSer.menu" > 
+                        <li *ngFor="let item of lrs.menu" > 
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
                                <i [class]="item.icono">
                                </i><span class="hide-menu">{{ item.titulo }} <span class="label label-rouded label-themecolor float-right">{{item.submenu.length}}</span></span>

@@ -15,8 +15,8 @@ export class UsuarioService {
   url = environment.urlApi;
   usuario: Usuario;
   constructor(private http: HttpClient,
-              private lrs: LoginRegisterService) {
-              this.usuario = lrs.usuario;
+    private lrs: LoginRegisterService) {
+    this.usuario = lrs.usuario;
   }
 
   // /**
@@ -60,7 +60,7 @@ export class UsuarioService {
         map((res: any) => {
           // Solo modificaré el storage si soy yo
           if (usuario._id === this.usuario._id) {
-            this.lrs.guardarStorage(res.usuario, this.lrs.token);
+            this.lrs.guardarStorage(res.usuario, this.lrs.token, this.lrs.menu);
           }
 
           Swal.fire({

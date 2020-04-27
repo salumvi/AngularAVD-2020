@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Usuario } from '../../models/usuario.models';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,17 +15,19 @@ export class LoginRegisterService {
 
   usuario: Usuario;
   token = '';
+  menu: any[] = [];
 
   constructor(private http: HttpClient, public router: Router) {
     this.cargarStorage();
+
   }
 
   registrarUsuario(usuario: Usuario) {
-    
+
     return this.http.post(this.url + '/usuario', usuario).pipe(
-      
+
       map((res: any) => {
-        
+
         Swal.fire({
           icon: 'success',
           title: 'Usuario creado correctamente',
@@ -44,10 +47,15 @@ export class LoginRegisterService {
 
     return this.http.post(this.url + '/login', usuario).pipe(
       map((res: any) => {
-        this.guardarStorage(res.usuario, res.token);
-        // this.router.navigate(['/login']);
-
-        return true;
+        console.log(res);
+        if (res.ok) {
+          this.guardarStorage(res.usuario, res.token, res.menu);
+          this.menu = res.menu;
+          return true;
+        } else {
+          console.log(res);
+          throw new Error('Error de logado');
+        }
       })
     );
   }
@@ -55,17 +63,18 @@ export class LoginRegisterService {
   loginGoogle(token: string) {
     return this.http.post(this.url + '/login/google', { idtoken: token }).pipe(
       map((res: any) => {
-        this.guardarStorage(res.usuario, res.token);
-        // this.router.navigate(['/login']);
+        this.guardarStorage(res.usuario, res.token, res.menu);
+        this.menu = res.menu;
         return true;
       })
     );
   }
 
-  guardarStorage(usuario: Usuario, token: string = this.token) {
+  guardarStorage(usuario: Usuario, token: string = this.token, menu: any) {
     // guardamos la info en localstorage y navegamos a dashboard
     localStorage.setItem('tokenApp', token);
     localStorage.setItem('usuarioApp', JSON.stringify(usuario));
+    localStorage.setItem('menu', JSON.stringify(menu));
 
     this.usuario = usuario;
     this.token = token;
@@ -75,6 +84,7 @@ export class LoginRegisterService {
     // guardamos la info en localstorage y navegamos a dashboard
     if (localStorage.getItem('tokenApp')) {
       this.usuario = JSON.parse(localStorage.getItem('usuarioApp'));
+      this.menu = JSON.parse(localStorage.getItem('menu'));
       this.token = localStorage.getItem('tokenApp');
     } else {
       this.token = '';
@@ -87,6 +97,8 @@ export class LoginRegisterService {
     this.usuario = null;
     localStorage.removeItem('tokenApp');
     localStorage.removeItem('usuarioApp');
+    localStorage.removeItem('menu');
+
   }
 
   estaLogado() {

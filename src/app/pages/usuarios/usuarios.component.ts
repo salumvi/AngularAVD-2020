@@ -4,6 +4,7 @@ import { Usuario } from 'src/app/models/usuario.models';
 import { environment } from '../../../environments/environment';
 import Swal from 'sweetalert2';
 import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
+import { LoginRegisterService } from '../../services/services/login-register.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -18,7 +19,8 @@ export class UsuariosComponent implements OnInit {
   cargando = true;
   roles = environment.role;
   constructor(private us: UsuarioService,
-              public mus: ModalUploadService) {
+              public mus: ModalUploadService,
+              private lsr: LoginRegisterService) {
   }
 
   ngOnInit(): void {
@@ -69,8 +71,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   borrarUsuario(usuario: Usuario, i: number) {
-
-    if (this.us.usuario._id === usuario._id) {
+    if (this.lsr.usuario._id === usuario._id) {
       Swal.fire('Error', 'No puede eliminar su Usuario', 'error');
       return ;
     }

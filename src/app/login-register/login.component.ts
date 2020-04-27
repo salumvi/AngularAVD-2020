@@ -75,7 +75,11 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.sl.login(forma.value, forma.value.recuerdame).subscribe(
-      () => window.location.href = '#/dashboard' );
+      () => window.location.href = '#/dashboard' ,
+      err => {
+        Swal.fire('Error en el login',err.error.mensaje, 'error');
+      })
+      ;
 
   }
 }

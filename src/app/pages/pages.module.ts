@@ -23,6 +23,7 @@ import { HospitalComponent } from './hospital/hospital.component';
 import { BuscadorComponent } from '../components/buscador/buscador.component';
 import { MedicosComponent } from './medicos/medicos.component';
 import { MedicoComponent } from './medicos/medico.component';
+import { BuscadorGeneralComponent } from './buscador-general/buscador-general.component';
 
 @NgModule({
     imports: [
@@ -56,7 +57,8 @@ import { MedicoComponent } from './medicos/medico.component';
         HospitalComponent,
         BuscadorComponent,
         MedicosComponent,
-        MedicoComponent
+        MedicoComponent,
+        BuscadorGeneralComponent
     ],
     providers: [
     ],

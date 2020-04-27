@@ -13,7 +13,8 @@ export class CargaArchivoService {
 
   url = environment.urlApi;
   usuario: Usuario;
-  constructor(private http: HttpClient,
+  constructor(
+    private http: HttpClient,
     private lrs: LoginRegisterService) {
     this.usuario = lrs.usuario;
   }
@@ -31,13 +32,13 @@ export class CargaArchivoService {
     formData.append('imagen', archivo);
     return this.http.put(this.url + '/upload/' + tipo + '/' + id, formData)
       .pipe(map((res: any) => {
-        
+
         let img: string;
         // tengo que controlar los errores
         if (tipo === 'usuarios') {
           img = res.usuario.img;
           this.lrs.usuario.img = res.usuario.img;
-          this.lrs.guardarStorage(res.usuario);
+          this.lrs.guardarStorage(res.usuario, this.lrs.token, this.lrs.menu);
         }
         if (tipo === 'medicos') {
           img = res.medico.img;

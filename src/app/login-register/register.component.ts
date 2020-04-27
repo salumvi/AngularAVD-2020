@@ -74,10 +74,9 @@ export class RegisterComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops....',
-          text: e.error.mensaje,
+          text: e.error.mensaje + '-Usuario repatido',
         });
       });
-    ;
   }
 
 }

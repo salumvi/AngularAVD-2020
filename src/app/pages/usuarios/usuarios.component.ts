@@ -53,7 +53,7 @@ export class UsuariosComponent implements OnInit {
     this.desde += valor;
     this.cargarUsuarios();
   }
-  buscarUsuarios(termino: string) {
+  buscar(termino: string) {
     if(termino.length === 0 ){
       this.desde = 0;
       this.cargarUsuarios();

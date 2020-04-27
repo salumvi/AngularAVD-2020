@@ -41,7 +41,7 @@
                 <label for="exampleInputEmail1">Selecciones un archivo</label>
                 <div class="input-group">
                     <div class="input-group-addon"><i class="ti-file"></i></div>
-                    <input type="file"  (change)="seleccionaImagen($event.target.files[0])"  name="archivo" >
+                    <input #input type="file"  (change)="seleccionaImagen($event.target.files[0])"  name="archivo" >
                 </div>
             </div>
             <br>

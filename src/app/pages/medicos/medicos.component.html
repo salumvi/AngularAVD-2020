@@ -1,0 +1,53 @@
+<app-buscador [estaCargando]="cargando" (emitirBuscar)="buscar($event)" ></app-buscador>
+
+<div  *ngIf="!cargando" class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                 <h3 class="card-title"> Hospitales registrados (<small> {{totalMedicos}} </small> )</h3>   
+               <button   [routerLink]="['/medico','nuevo']" class="btn btn-outline-info float-right">Crear Medico</button>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="w70">Imagen</th>
+                            <th>Nombre</th>
+                            <th>Hospital</th>
+                            <th>  
+                      
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let medico of medicos, let i = index">
+                            <td class="w70"> 
+                                <img class="w50 img-circle" [src]="medico.img | imagen:'medicos'">
+                            </td>
+                            <td>
+                                  {{medico.nombre}}
+                            </td>
+                            <td>
+                                    {{medico.hospital?.nombre}}
+                            </td>
+                            <td>
+                                 <button  [routerLink]="['/medico',medico._id]"  type="button" class="btn btn-primary mr-1">
+                                    <i class="fa fa-pencil-square-o" ></i>
+                                   </button> 
+                                   <button  (click)="borrarMedico(medico, i)" type="button" class="btn btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </button> 
+                               
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+
+              
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

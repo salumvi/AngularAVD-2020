@@ -9,11 +9,11 @@ import { Usuario } from 'src/app/models/usuario.models';
 })
 export class HeaderComponent implements OnInit {
 
-  usuario: Usuario;
-  constructor( private lrs: LoginRegisterService) { }
+  
+  constructor( public lrs: LoginRegisterService) { }
 
   ngOnInit(): void {
-    this.usuario = this.lrs.usuario;
+
 
   }
 

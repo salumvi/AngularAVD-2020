@@ -16,36 +16,38 @@ export class UsuarioService {
   usuario: Usuario;
   constructor(private http: HttpClient,
               private lrs: LoginRegisterService) {
-    this.usuario = lrs.usuario;
+              this.usuario = lrs.usuario;
   }
 
-  /**
-   * Subir archivo de imagen
-   * @param archivo;
-   * @param tipo;
-   * @param id;
-   */
-  public subirArchivo(archivo: File, tipo: string, id: string) {
+  // /**
+  //  * Subir archivo de imagen
+  //  * @param archivo;
+  //  * @param tipo;
+  //  * @param id;
+  //  */
+  // public subirArchivo(archivo: File, tipo: string, id: string) {
 
 
-    const formData = new FormData();
-    formData.append('imagen', archivo);
-    return this.http.put(this.url + '/upload/' + tipo + '/' + id, formData)
-      .pipe(map((res: any) => {
+  //   const formData = new FormData();
+  //   formData.append('imagen', archivo);
+  //   return this.http.put(this.url + '/upload/' + tipo + '/' + id, formData)
+  //     .pipe(map((res: any) => {
 
-        // tengo que controlar los errores
+  //       // tengo que controlar los errores
+  //       if (tipo === 'usuario') {
+  //         this.lrs.usuario.img = res.usuario.img;
+  //         this.lrs.guardarStorage(res.usuario);
+  //       }
 
-        this.lrs.usuario.img = res.usuario.img;
-        this.lrs.guardarStorage(res.usuario);
-        Swal.fire({
-          icon: 'success',
-          title: 'Foto Actualizado correctamente',
-        });
+  //       Swal.fire({
+  //         icon: 'success',
+  //         title: 'Foto Actualizado correctamente',
+  //       });
 
-        return true;
-      }));
+  //       return true;
+  //     }));
 
-  }
+  // }
 
 
   actualizarUsuario(usuario: Usuario) {

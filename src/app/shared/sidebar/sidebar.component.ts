@@ -10,14 +10,14 @@ import { Usuario } from 'src/app/models/usuario.models';
 })
 export class SidebarComponent implements OnInit {
 
-  usuario: Usuario;
+
   constructor(public sSer: SidebarService,
-              private lrs: LoginRegisterService) {
+              public lrs: LoginRegisterService) {
     // console.log(sSer);
    }
 
   ngOnInit(): void {
-    this.usuario = this.lrs.usuario;
+
   }
   logOut(){
     this.lrs.logout();

@@ -1,0 +1,50 @@
+
+
+<app-buscador [estaCargando]="cargando" (emitirBuscar)="buscar($event)" ></app-buscador>
+
+<div  *ngIf="!cargando" class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                 <h3 class="card-title"> Hospitales registrados (<small> {{totalHospitales}} </small> )</h3>   
+               <button  (click)= "crearHospital()"class="btn btn-outline-info float-right">Crear Hospital</button>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="w70">Imagen</th>
+                            <th>Hospital</th>
+                            <th>  
+                      
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let hospital of hospitales, let i = index">
+                            <td class="w70"> 
+                                <img (click)="modificarImagen(hospital)" class="w50 img-circle pointer" [src]="hospital.img | imagen:'hospitales'">
+                            </td>
+                            <td>
+                                    <input  [(ngModel)]="hospital.nombre" class="form-control">
+                            </td>
+                            <td>
+                                 <button  (click)="actualizarHospital(hospital)" type="button" class="btn btn-primary mr-1">
+                                    <i class="fa fa-save"></i>
+                                   </button> 
+                                   <button  (click)="borrarHospital(hospital, i)" type="button" class="btn btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </button> 
+                               
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+
+              
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

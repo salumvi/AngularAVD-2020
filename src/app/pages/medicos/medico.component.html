@@ -1,0 +1,57 @@
+<div class="row animated fadeIn">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Médico:</h4>
+        <h6 class="card-subtitle">{{medico.nombre}}</h6>
+        <form #f="ngForm" (ngSubmit)="guardarMedico(f)" ngNativeValidate class="form p-t-20">
+
+          <div class="form-group">
+            <label>nombre</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-user-o" aria-hidden="true"></i></div>
+              <input [(ngModel)]="medico.nombre" name="nombre" type="text" class="form-control" placeholder="Nombre"
+                required>
+            </div>
+          </div>
+
+
+
+          <div class="form-group">
+            <label for="pwd1">Hospital</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-hospital-o" aria-hidden="true"></i></div>
+              <select #h (change)="cambioHospital(h.value)" [(ngModel)]="medico.hospital._id" name="hospital" class="form-control" required>
+                <option value="">--Seleccione uno--</option>
+                <option *ngFor="let hos of hospitales" [value]="hos._id"> {{hos.nombre}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <button type="submit" class="btn btn-success waves-effect waves-light m-r-5 w-auto"><i
+                class="fa fa-floppy-o mr-2" aria-hidden="true"></i>Guardar</button>
+            <a [routerLink]="['/medicos']" class="btn btn-info waves-effect waves-light w-auto">Volver</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-3">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Hospital:</h4>
+        <img class="w150 img-fluid" [src]="hospital.img | imagen:'hospitales'">
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Fotografía</h4>
+        <img (click)="modificarImagen(medico)" class="w150 img-fluid pointer" [src]="medico?.img | imagen:'medicos'">
+      </div>
+    </div>
+  </div>
+
+</div>

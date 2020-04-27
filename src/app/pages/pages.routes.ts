@@ -11,6 +11,9 @@ import { LoginGuardGuard } from '../services/guards/login-guard.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { NopagefoundComponent } from '../shared/nopagefound/nopagefound.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { HospitalComponent } from './hospital/hospital.component';
+import { MedicosComponent } from './medicos/medicos.component';
+import { MedicoComponent } from './medicos/medico.component';
 
 
 const routes: Routes = [
@@ -32,7 +35,16 @@ const routes: Routes = [
             {path: 'usuarios',
              component: UsuariosComponent,
              data: {titulo: 'Usuario Mantenimiento', descripcion: 'Mantinimiento de usuarios'}},
-            {path: '', redirectTo: '/login', pathMatch: 'full' }
+             {path: 'hospitales',
+             component: HospitalComponent,
+             data: {titulo: 'Hospital Mantenimiento', descripcion: 'Mantinimiento de Hospital'}},
+             {path: 'medicos',
+             component: MedicosComponent,
+             data: {titulo: 'Medicos Mantenimiento', descripcion: 'Mantinimiento de Medicos'}},
+             {path: 'medico/:param',
+             component: MedicoComponent,
+             data: {titulo: 'Medico Mantenimiento', descripcion: 'Mantinimiento de Medico'}},
+             {path: '', redirectTo: '/login', pathMatch: 'full' }
 
 
         ],

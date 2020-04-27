@@ -19,6 +19,10 @@ import { PipesModule } from '../pipes/pipes.module';
 import { CommonModule } from '@angular/common';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
+import { HospitalComponent } from './hospital/hospital.component';
+import { BuscadorComponent } from '../components/buscador/buscador.component';
+import { MedicosComponent } from './medicos/medicos.component';
+import { MedicoComponent } from './medicos/medico.component';
 
 @NgModule({
     imports: [
@@ -48,7 +52,11 @@ import { ModalUploadComponent } from '../components/modal-upload/modal-upload.co
         RxjsComponent,
         ProfileComponent,
         UsuariosComponent,
-        ModalUploadComponent
+        ModalUploadComponent,
+        HospitalComponent,
+        BuscadorComponent,
+        MedicosComponent,
+        MedicoComponent
     ],
     providers: [
     ],

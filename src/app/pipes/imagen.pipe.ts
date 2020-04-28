@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 export class ImagenPipe implements PipeTransform {
   transform(urlImg: string, tipo: string = 'usuarios'): string {
 
-    let url = environment.urlApi + '/img';
+    let url: string = environment.urlApi + '/img';
 
     if (!urlImg || urlImg.length === 0) {
       return url + '/usuarios/cualquierimagen';

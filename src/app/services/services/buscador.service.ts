@@ -12,7 +12,7 @@ export class BuscadorService {
 
 
 buscardor(termino: string) {
-  const url = environment.urlApi + '/busqueda/' + termino;
+  const url: string = environment.urlApi + '/busqueda/' + termino;
 
   return this.http.get(url);
 

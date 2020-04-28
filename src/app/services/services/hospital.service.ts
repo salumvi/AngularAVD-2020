@@ -20,7 +20,7 @@ export class HospitalService {
 
 
   cargarHospitales() {
-    const url = environment.urlApi + '/hospital';
+    const url: string = environment.urlApi + '/hospital';
     return this.http.get(url).pipe(map((res: any) => {
 
       return res.hospitales;
@@ -29,14 +29,14 @@ export class HospitalService {
   }
 
   obtenerHospital(id: string) {
-    const url = environment.urlApi + '/hospital/' + id;
+    const url: string = environment.urlApi + '/hospital/' + id;
     return this.http.get(url).pipe(map((res: any) => {
       return res.hospital;
     }));
   }
 
   crearHospital(hospital: Hospital) {
-    const url = environment.urlApi + '/hospital/?token=' + this.lrs.token;
+    const url: string = environment.urlApi + '/hospital/?token=' + this.lrs.token;
 
     return this.http.post(url, hospital).pipe(map((res) => {
       
@@ -45,7 +45,7 @@ export class HospitalService {
 
   borrarHospital(id: string) {
 
-    const url = environment.urlApi + '/hospital/' + id + '?token=' + this.lrs.token;
+    const url: string = environment.urlApi + '/hospital/' + id + '?token=' + this.lrs.token;
     return this.http.delete(url).pipe(map((r: any) => {
       Swal.fire({
         icon: 'success',
@@ -58,12 +58,12 @@ export class HospitalService {
   }
 
   buscarHospital(termino: string) {
-    const url = environment.urlApi + '/busqueda/coleccion/hospitales/' + termino;
+    const url: string = environment.urlApi + '/busqueda/coleccion/hospitales/' + termino;
 
     return this.http.get(url).pipe(map((res: any) => res.hospitales));
   }
   actualizarHospital(hospital: Hospital) {
-    const url = environment.urlApi + '/hospital/' + hospital._id + '?token=' + this.lrs.token;
+    const url: string = environment.urlApi + '/hospital/' + hospital._id + '?token=' + this.lrs.token;
 
     return this.http.put(url, hospital).pipe(map((r: any) => {
 

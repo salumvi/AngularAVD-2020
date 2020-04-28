@@ -7,7 +7,8 @@ import { LoginRegisterService } from '../services/login-register.service';
 })
 export class LoginGuardGuard implements CanActivate {
 
-  constructor(public lrs: LoginRegisterService,
+  constructor(
+    public lrs: LoginRegisterService,
     public router: Router){
 
   }

@@ -11,7 +11,7 @@ import { LoginRegisterService } from './login-register.service';
 })
 export class CargaArchivoService {
 
-  url = environment.urlApi;
+  url: string = environment.urlApi;
   usuario: Usuario;
   constructor(
     private http: HttpClient,

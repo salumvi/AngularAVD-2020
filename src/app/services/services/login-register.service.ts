@@ -1,23 +1,25 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Usuario } from '../../models/usuario.models';
 import { map, catchError } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginRegisterService {
-  private url = environment.urlApi;
+  private url: string = environment.urlApi;
 
   usuario: Usuario;
   token = '';
   menu: any[] = [];
 
-  constructor(private http: HttpClient, public router: Router) {
+  constructor(
+    private http: HttpClient,
+    public router: Router) {
     this.cargarStorage();
 
   }
@@ -56,8 +58,11 @@ export class LoginRegisterService {
           console.log(res);
           throw new Error('Error de logado');
         }
-      })
-    );
+      }, catchError(err => {
+        this.router.navigate(['/login']);
+        Swal.fire('No se pudo Logar', 'error en base de datos' , 'error');
+        return  Observable.throw(err);
+      })));
   }
 
   loginGoogle(token: string) {
@@ -98,6 +103,25 @@ export class LoginRegisterService {
     localStorage.removeItem('tokenApp');
     localStorage.removeItem('usuarioApp');
     localStorage.removeItem('menu');
+    this.router.navigate(['/login']);
+
+  }
+
+  renovarToken() {
+
+   return this.http.get(this.url + '/login?token=' + this.token)
+      .pipe(map((res: any) => {
+            this.token = res.token;
+            localStorage.setItem('token', this.token);
+
+            return true;
+      }),
+      catchError(err => {
+        this.router.navigate(['/login']);
+        Swal.fire('No se pudo renovar el token','error en base de datos' , 'error');
+        return  Observable.throw(err);
+      })
+      );
 
   }
 

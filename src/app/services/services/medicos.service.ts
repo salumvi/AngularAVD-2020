@@ -16,13 +16,13 @@ export class MedicosService {
 
 
   cargarmedicos() {
-    const url = environment.urlApi + '/medico';
+    const url: string = environment.urlApi + '/medico';
 
     return this.http.get(url);
   }
 
   buscarMedicos(termino: string) {
-    const url = environment.urlApi + '/busqueda/coleccion/medicos/' + termino;
+    const url: string = environment.urlApi + '/busqueda/coleccion/medicos/' + termino;
 
     return this.http.get(url).pipe(map((res: any) => res));
   }
@@ -32,14 +32,14 @@ export class MedicosService {
    * retorna una respuesta en formato: { ok: boolean, medico: Medico }
    */
   getByIdMedico(id: string) {
-    const url = environment.urlApi + '/medico/' + id;
+    const url: string = environment.urlApi + '/medico/' + id;
 
     return this.http.get(url);
 
   }
 
   borrarMedico(id: string) {
-    const url = environment.urlApi + '/medico/' + id + '?token=' + this.lrs.token;
+    const url: string = environment.urlApi + '/medico/' + id + '?token=' + this.lrs.token;
     return this.http.delete(url).pipe(map((r: any) => {
       Swal.fire({
         icon: 'success',
@@ -59,7 +59,7 @@ export class MedicosService {
    * devueve el médico nuevo
    */
   crearMedico(nombre: string, hospitalId: string) {
-    const url = environment.urlApi + '/medico' + '?token=' + this.lrs.token;
+    const url: string = environment.urlApi + '/medico' + '?token=' + this.lrs.token;
 
     return this.http.post(url, { nombre, usuario: this.lrs.usuario._id, hospital: hospitalId })
       .pipe(map((r: any) => {
@@ -82,7 +82,7 @@ export class MedicosService {
    * return observable<Medico>
    */
   modicicarMedico(idMedico: string, nombreMedico: string, hospitalId: string): Observable<any> {
-    const url = environment.urlApi + '/medico/' + idMedico + '?token=' + this.lrs.token;
+    const url: string = environment.urlApi + '/medico/' + idMedico + '?token=' + this.lrs.token;
 
     return this.http.put(url, { nombre: nombreMedico, hospital: hospitalId })
       .pipe(map((res: any) => {

@@ -17,7 +17,7 @@ export class UsuariosComponent implements OnInit {
   desde = 0;
   totalUsuarios;
   cargando = true;
-  roles = environment.role;
+  roles: any = environment.role;
   constructor(private us: UsuarioService,
               public mus: ModalUploadService,
               private lsr: LoginRegisterService) {

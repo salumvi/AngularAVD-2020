@@ -12,7 +12,7 @@ import { Usuario } from 'src/app/models/usuario.models';
 export class UsuarioService {
 
 
-  url = environment.urlApi;
+  url: string = environment.urlApi;
   usuario: Usuario;
   constructor(private http: HttpClient,
     private lrs: LoginRegisterService) {
